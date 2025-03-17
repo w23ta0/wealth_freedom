@@ -332,44 +332,27 @@ function determineAllStages(assets) {
   return { currentStage, futureStages };
 }
 
-function calculateTimeToAllStages(
-  currentAssets,
-  annualSavings,
-  futureStages,
-  currentAge
-) {
-  if (futureStages.length === 0) return [];
-
+function calculateTimeToAllStages(currentAssets, annualSavings, futureStages, currentAge) {
+  let years = 0;
   let assets = currentAssets;
   const results = [];
-  let cumulativeYears = 0;
-
   for (const stage of futureStages) {
     if (assets >= stage.minAssets) continue;
-
-    const requiredAssets = stage.minAssets;
-    const gap = Math.max(requiredAssets - assets, 0); // 修正负数差额
-
-    if (annualSavings <= 0 && gap > 0) {
+    const gap = stage.minAssets - assets;
+    if (annualSavings <= 0) {
       results.push({ ...stage, yearsToReach: "无法达成（收支失衡）" });
       continue;
     }
-
-    const years = Math.ceil(gap / annualSavings);
-    cumulativeYears += years;
-
-    if (currentAge + cumulativeYears > 100) {
+    // 计算需要多少年（允许小数，不强制向上取整）
+    const requiredYears = gap / annualSavings;
+    years += requiredYears;
+    if (currentAge + years > 100) {
       results.push({ ...stage, yearsToReach: "无法达成（年龄超限）" });
-      continue;
+      break;
     }
-
-    results.push({
-      ...stage,
-      yearsToReach: years > 0 ? cumulativeYears : "无法达成",
-    });
-    assets = requiredAssets;
+    results.push({ ...stage, yearsToReach: years.toFixed(2) + " 年" });
+    assets = stage.minAssets;
   }
-
   return results;
 }
 
