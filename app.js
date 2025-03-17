@@ -1,7 +1,7 @@
 const stages = [
   // 负资产阶段（债务危机）
   {
-    minAssets: -1000000000000, // -1000亿
+    minAssets: -100000000000, // -10亿
     name: "银行都怕你不小心嘎了",
     title: "商业巨鳄",
     description: "债务规模超过万亿，银行风控系统已全面预警，需紧急处理资产风险",
@@ -9,20 +9,44 @@ const stages = [
     tag: ["商业大佬", "金融怪兽", "高危玩家"],
   },
   {
-    minAssets: -1000000000, // -10亿
+    minAssets: -500000000, // -5亿
     name: "生活惬意",
-    title: "公司老总",
+    title: "集团掌舵人", // 新title突出企业规模与决策者身份
     description: "企业破产导致个人承担连带责任，表面光鲜但债务压力巨大",
     icon: "fas fa-building",
-    tag: ["破产CEO", "假富豪", "表面风光"],
+    tag: ["集团董事", "假富豪", "表面风光"],
   },
   {
-    minAssets: -10000000, //  -1000万
+    minAssets: -100000000, // -1亿
+    name: "风控名单",
+    title: "资本玩家",
+    description: "债务规模达亿级，金融机构启动特别监管程序",
+    icon: "fas fa-exclamation-triangle",
+    tag: ["债务重组", "资产保全", "金融高压线"],
+  },
+  {
+    minAssets: -10000000, // -1000万
+    name: "破产预警",
+    title: "实业经营者", // 新title强调实体产业属性
+    description: "公司经营危机传导至个人资产，面临司法追偿",
+    icon: "fas fa-balance-scale",
+    tag: ["连带责任", "失信风险", "经营寒冬"],
+  },
+  {
+    minAssets: -5000000, //  -500万
     name: "供房养车",
     title: "合格成功者",
     description: "拥有车房但深陷贷款泥潭，现金流紧张难以支撑日常开支",
     icon: "fas fa-car",
     tag: ["车奴房奴", "月光族2.0", "隐形贫困人口"],
+  },
+  {
+    minAssets: -3000000, // -300万
+    name: "断供危机",
+    title: "房奴终极形态",
+    description: "房贷+消费贷全面逾期，面临资产拍卖风险",
+    icon: "fas fa-house-crack",
+    tag: ["法拍房预备役", "信用黑名单", "债务雪球"],
   },
   {
     minAssets: -1000000, // -100万
@@ -33,12 +57,28 @@ const stages = [
     tag: ["房产小白", "投资新手", "借钱买房"],
   },
   {
+    minAssets: -500000, // -50万
+    name: "以贷养贷",
+    title: "卡奴",
+    description: "多平台借贷维持基本生活，利息吞噬收入",
+    icon: "fas fa-credit-card",
+    tag: ["网贷围城", "拆东补西", "征信花户"],
+  },
+  {
     minAssets: -100000, //  -10万
-    name: "生活质量",
+    name: "品质生活",
     title: "中度消费者",
     description: "追求中产生活品质，但收入难以覆盖日常消费支出",
     icon: "fas fa-star",
     tag: ["精致穷", "假装有钱", "中产幻觉"],
+  },
+  {
+    minAssets: -50000, // -5万
+    name: "生存维艰",
+    title: "灵活就业者",
+    description: "收入不稳定导致基本生活保障困难",
+    icon: "fas fa-hand-holding-usd",
+    tag: ["零工经济", "社保断缴", "温饱边缘"],
   },
   {
     minAssets: -10000, // -1万
@@ -95,7 +135,7 @@ const stages = [
   {
     minAssets: 200000, // 20万
     name: "旅游自由",
-    title: "金领",
+    title: "新中产预备役",
     description: "可负担国内旅游和基础度假消费",
     icon: "fas fa-plane",
     tag: ["旅行达人", "度假专家", "世界那么大"],
@@ -111,11 +151,11 @@ const stages = [
   // 中产阶段
   {
     minAssets: 1000000, //  100万
-    name: "首付自由",
+    name: "首付攻坚",
     title: "普通人极限",
     description: "可支付一线城市首付款（30%）",
     icon: "fas fa-piggy-bank",
-    tag: ["房贷起步", "刚需购房"],
+    tag: ["房贷计算器", "公积金攻略", "摇号大军"],
   },
   {
     minAssets: 2000000, // 200万
@@ -125,8 +165,15 @@ const stages = [
     icon: "fas fa-laptop-code",
     tag: ["副业刚需", "睡后收入", "FIRE运动"],
   },
-
   // 高净值阶段
+  {
+    minAssets: 3000000, // 300万
+    name: "医疗自由",
+    title: "健康守护者",
+    description: "可享受私立医院绿色通道及高端体检",
+    icon: "fas fa-heartbeat",
+    tag: ["医疗内卷", "健康焦虑", "VIP通道", "和睦家常客", "基因检测", "海外医疗咨询"],
+  },
   {
     minAssets: 5000000, // 500万
     name: "学区自由",
@@ -137,11 +184,11 @@ const stages = [
   },
   {
     minAssets: 10000000, // 1000万
-    name: "医疗自由",
-    title: "健康守护者",
-    description: "可负担私立医院VIP服务及海外医疗",
-    icon: "fas fa-heartbeat",
-    tag: ["医疗内卷", "健康焦虑", "VIP通道"],
+    name: "投资自由",
+    title: "理财行家",
+    description: "可构建多元化投资组合（房产/股票/基金）",
+    icon: "fas fa-chart-pie",
+    tag: ["固收+", "家族办公室", "科创板打新","资产配置"],
   },
   {
     minAssets: 30000000, // 3000万
@@ -150,6 +197,14 @@ const stages = [
     description: "可在北上广深持有3套以上房产",
     icon: "fas fa-city",
     tag: ["包租婆日常", "房产投资", "收租人生"],
+  },
+  {
+    minAssets: 50000000, // 5000万
+    name: "阶层跃迁",
+    title: "企业家",
+    description: "可投资实体产业或参与Pre-IPO项目",
+    icon: "fas fa-industry",
+    tag: ["独角兽捕手", "政商关系", "资本运作"],
   },
   {
     minAssets: 100000000, // 1亿
