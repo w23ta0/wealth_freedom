@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="zh">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>财务自由计算器</title>
+    <!-- Font Awesome 图标库 -->
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"
+    />
+    <!-- 谷歌字体 -->
+    <link
+      href="https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@300;400;500;700&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <div class="container">
+      <header>
+        <h1><i class="fas fa-chart-line header-icon"></i> 财务自由计算器</h1>
+        <a href="https://hits.seeyoufarm.com"><img src="https://hits.seeyoufarm.com/api/count/incr/badge.svg?url=https%3A%2F%2Fwealth-freedom.vercel.app&count_bg=%2379C83D&title_bg=%23555555&icon=&icon_color=%23E7E7E7&title=%E8%AE%BF%E9%97%AE%E9%87%8F&edge_flat=false"/></a>
+      </header>
+
+      <div class="card">
+        <form id="financial-form">
+          <div class="input-group">
+            <div class="input-group">
+              <label for="age"><i class="fas fa-birthday-cake"></i> 年龄</label>
+              <input
+                type="number"
+                id="age"
+                placeholder="请输入您的年龄"
+                required
+                min="0"
+                max="100"
+              />
+            </div>
+
+            <label for="assets"
+              ><i class="fas fa-wallet"></i> 总资产（元）</label
+            >
+            <input
+              type="number"
+              id="assets"
+              placeholder="请输入您的总资产"
+              required
+            />
+          </div>
+
+          <div class="input-group">
+            <label for="monthlyIncome"
+              ><i class="fas fa-money-bill-wave"></i> 月收入（元）</label
+            >
+            <input
+              type="number"
+              id="monthlyIncome"
+              placeholder="请输入您的月收入"
+              required
+            />
+          </div>
+
+          <div class="input-group">
+            <label for="monthlyExpenditure"
+              ><i class="fas fa-shopping-cart"></i> 月支出（元）</label
+            >
+            <input
+              type="number"
+              id="monthlyExpenditure"
+              placeholder="请输入您的月支出"
+              required
+            />
+          </div>
+
+          <button type="submit"><i class="fas fa-calculator"></i> 计算</button>
+        </form>
+      </div>
+
+      <div id="result" class="hidden card">
+        <div class="result-header">
+          <i class="fas fa-star result-icon"></i>
+          <h2>计算结果</h2>
+        </div>
+
+        <div class="current-stage">
+          <h3><i class="fas fa-trophy"></i> 当前阶段</h3>
+
+          <div class="stage-box">
+            <div class="stage-name-wrapper">
+              <div class="stage-title"></div>
+              <div class="stage-name"></div>
+              <div class="stage-tags"></div>
+            </div>
+            <p class="description"></p>
+          </div>
+        </div>
+
+        <div class="advice">
+          <h3><i class="fas fa-lightbulb"></i> 财务建议</h3>
+          <div class="advice-box">
+            <p></p>
+          </div>
+        </div>
+
+        <div class="future-stages">
+          <h3><i class="fas fa-road"></i> 财富路线</h3>
+          <table id="stages-table">
+            <thead>
+              <tr>
+                <th><i class="fas fa-flag"></i> 阶段名称</th>
+                <th><i class="fas fa-coins"></i> 所需资产 (元)</th>
+                <th><i class="fas fa-hourglass-half"></i> 预计所需时间 (年)</th>
+              </tr>
+            </thead>
+            <tbody></tbody>
+          </table>
+        </div>
+      </div>
+
+      <footer>
+        <p>
+          <i class="fas fa-info-circle"></i>
+          本计算器仅供参考，请根据实际情况制定个人财务计划
+        </p>
+      </footer>
+    </div>
+    <script src="app.js"></script>
+  </body>
+</html>
