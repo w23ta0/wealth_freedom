@@ -33,9 +33,6 @@
   opacity: 0;
   transition: opacity 0.2s;
   z-index: 1000;
-  left: 50%;
-  transform: translateX(-50%);
-  bottom: 120%;
   text-align: center;
 }
 
