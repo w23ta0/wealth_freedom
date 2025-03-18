@@ -244,7 +244,7 @@ document
 function calculateFinancialFreedom() {
   clearResult();
 
-  const assets = parseFloat(document.getElementById("assets").value);
+    const assets = parseFloat(document.getElementById("assets").value);
   const monthlyIncome = parseFloat(
     document.getElementById("monthlyIncome").value
   );
