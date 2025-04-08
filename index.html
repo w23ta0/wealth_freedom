@@ -1,59 +1,147 @@
 <!DOCTYPE html>
-<html lang="zh">
+<html lang="zh" data-theme="dark">
 
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>财务自由计算器</title>
+  <meta name="description" content="一个有趣的财富自由计算器，帮助您了解当前财务状态并规划未来财富之路" />
+  <meta name="keywords" content="财富自由,理财计算器,财务规划,投资收益,财务自由" />
+  <title>财富自由计算器 | 探索你的财富之路</title>
   <link rel="icon" href="favicon.ico" type="image/x-icon">
   <!-- Font Awesome 图标库 -->
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" />
-  <!-- 谷歌字体 -->
-  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@300;400;500;700&display=swap"
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+  <!-- Google 字体 -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Noto+Sans+SC:wght@300;400;500;700&display=swap"
     rel="stylesheet" />
   <link rel="stylesheet" href="styles.css" />
 </head>
 
 <body>
+  <!-- 浮动粒子背景 -->
+  <div class="particles" id="particles"></div>
+
+  <!-- 主题切换按钮 -->
+  <button class="theme-toggle" id="themeToggle" aria-label="切换主题">
+    <i class="fas fa-moon"></i>
+  </button>
+
   <div class="container">
     <header>
-      <h1><i class="fas fa-chart-line header-icon"></i> 财务自由计算器</h1>
-      <a href="https://hits.seeyoufarm.com"><img
-          src="https://hits.seeyoufarm.com/api/count/incr/badge.svg?url=https%3A%2F%2Fwealth-freedom.vercel.app&count_bg=%2379C83D&title_bg=%23555555&icon=&icon_color=%23E7E7E7&title=%E8%AE%BF%E9%97%AE%E9%87%8F&edge_flat=false" /></a>
+      <i class="fas fa-chart-line header-icon"></i>
+      <h1>财富自由计算器</h1>
+      <p class="header-subtitle">探索你的财富自由之路，从了解当前阶段开始</p>
     </header>
 
+    <!-- 输入表单卡片 -->
     <div class="card">
       <form id="financial-form">
         <div class="input-group">
+          <!-- 年龄输入 -->
+          <div class="form-field">
+            <label for="age">
+              <i class="fas fa-birthday-cake"></i> 年龄
+            </label>
+            <input type="number" id="age" placeholder="请输入您的年龄" required min="0" max="100" />
+          </div>
 
-          <label for="age"><i class="fas fa-birthday-cake"></i> 年龄 </label>
-          <input type="number" id="age" placeholder="请输入您的年龄" required min="0" max="100" />
+          <!-- 净资产输入 -->
+          <div class="form-field">
+            <label for="assets">
+              <i class="fas fa-wallet"></i> 净资产（元）
+              <i class="fas fa-question-circle tooltip-icon"
+                data-tooltip="净资产 = 总资产（存款、投资、房产净值等） - 总负债（房贷、车贷、信用卡欠款等）"></i>
+            </label>
+            <input type="number" id="assets" placeholder="请输入您的净资产" required />
+          </div>
 
-          <label for="assets"><i class="fas fa-wallet"></i> 净资产（元） <i class="fas fa-question-circle tooltip-icon"
-              data-tooltip="净资产 = 总资产（存款、投资、房产净值等） - 总负债（房贷、车贷、信用卡欠款等）"></i></label>
-          <input type="number" id="assets" placeholder="请输入您的净资产" required />
+          <!-- 月收入输入 -->
+          <div class="form-field">
+            <label for="monthlyIncome">
+              <i class="fas fa-money-bill-wave"></i> 月收入（元）
+            </label>
+            <input type="number" id="monthlyIncome" placeholder="请输入您的月收入" required />
+          </div>
 
-          <label for="monthlyIncome"><i class="fas fa-money-bill-wave"></i> 月收入（元）</label>
-          <input type="number" id="monthlyIncome" placeholder="请输入您的月收入" required />
+          <!-- 月支出输入 -->
+          <div class="form-field">
+            <label for="monthlyExpenditure">
+              <i class="fas fa-shopping-cart"></i> 月支出（元）
+              <i class="fas fa-question-circle tooltip-icon" data-tooltip="每月固定开销，如房租、贷款、生活费、餐饮、交通等"></i>
+            </label>
+            <input type="number" id="monthlyExpenditure" placeholder="请输入您的月支出" required />
+          </div>
 
-          <label for="monthlyExpenditure"><i class="fas fa-shopping-cart"></i> 月支出（元） <i
-              class="fas fa-question-circle tooltip-icon" data-tooltip="每月固定开销，如房租、贷款、生活费等"></i></label>
-          <input type="number" id="monthlyExpenditure" placeholder="请输入您的月支出" required />
+          <!-- 年化投资收益率滑块 -->
+          <div class="form-field">
+            <label for="investmentReturn">
+              <i class="fas fa-percentage"></i> 年化投资收益率
+              <i class="fas fa-question-circle tooltip-icon"
+                data-tooltip="预期年化投资收益率。银行存款约2-3%，稳健理财约4-6%，股票基金约8-12%"></i>
+            </label>
+            <div class="slider-container">
+              <div class="slider-header">
+                <span>0%</span>
+                <span class="slider-value" id="returnValue">5%</span>
+                <span>20%</span>
+              </div>
+              <input type="range" id="investmentReturn" min="0" max="20" value="5" step="0.5" />
+            </div>
+          </div>
         </div>
-        <button type="submit"><i class="fas fa-calculator"></i> 计算</button>
+
+        <button type="submit">
+          <i class="fas fa-calculator"></i> 开始计算
+        </button>
+      </form>
     </div>
-    </form>
 
-
+    <!-- 结果展示区域 -->
     <div id="result" class="hidden card">
       <div class="result-header">
         <i class="fas fa-star result-icon"></i>
         <h2>计算结果</h2>
       </div>
 
+      <!-- 财务摘要 -->
+      <div class="financial-summary" id="financialSummary">
+        <div class="summary-item neutral">
+          <i class="fas fa-piggy-bank"></i>
+          <div class="summary-label">净资产</div>
+          <div class="summary-value" id="summaryAssets">¥0</div>
+        </div>
+        <div class="summary-item" id="gapItem">
+          <i class="fas fa-clock"></i>
+          <div class="summary-label">日均消费</div>
+          <div class="summary-value" id="summaryGap">-</div>
+        </div>
+        <div class="summary-item neutral">
+          <i class="fas fa-calendar"></i>
+          <div class="summary-label">可支撑月数</div>
+          <div class="summary-value" id="summarySurvivalMonths">0 月</div>
+        </div>
+        <div class="summary-item" id="savingsItem">
+          <i class="fas fa-chart-line"></i>
+          <div class="summary-label">年储蓄</div>
+          <div class="summary-value" id="summaryAnnualSavings">¥0</div>
+        </div>
+        <div class="summary-item" id="savingsRateItem">
+          <i class="fas fa-percent"></i>
+          <div class="summary-label">储蓄率</div>
+          <div class="summary-value" id="summarySavingsRate">0%</div>
+        </div>
+        <div class="summary-item" id="investReturnItem">
+          <i class="fas fa-coins"></i>
+          <div class="summary-label">预计年投资收益</div>
+          <div class="summary-value" id="summaryInvestReturn">¥0</div>
+        </div>
+      </div>
+
+      <!-- 当前阶段 -->
       <div class="current-stage">
         <h3><i class="fas fa-trophy"></i> 当前阶段</h3>
-
         <div class="stage-box">
           <div class="stage-name-wrapper">
             <div class="stage-title"></div>
@@ -64,6 +152,20 @@
         </div>
       </div>
 
+      <!-- 进度条 -->
+      <div class="progress-section" id="progressSection">
+        <h3><i class="fas fa-tasks"></i> 前往下一阶段</h3>
+        <div class="progress-bar-container">
+          <div class="progress-bar" id="progressBar" style="width: 0%"></div>
+        </div>
+        <div class="progress-labels">
+          <span id="progressCurrent"><i class="fas fa-coins"></i> 年结余: <span id="progressAnnualSavings">¥0</span></span>
+          <span id="progressTarget">目标: ¥0 <span class="time-estimate">(<span
+                id="progressTimeEstimate">-</span>)</span></span>
+        </div>
+      </div>
+
+      <!-- 财务建议 -->
       <div class="advice">
         <h3><i class="fas fa-lightbulb"></i> 财务建议</h3>
         <div class="advice-box">
@@ -71,35 +173,40 @@
         </div>
       </div>
 
+      <!-- 财富路线 -->
       <div class="future-stages">
         <h3><i class="fas fa-road"></i> 财富路线</h3>
-        <table id="stages-table">
-          <thead>
-            <tr>
-              <th><i class="fas fa-flag"></i> 阶段名称</th>
-              <th><i class="fas fa-coins"></i> 所需资产 (元)</th>
-              <th><i class="fas fa-hourglass-half"></i> 预计所需时间 (年)</th>
-            </tr>
-          </thead>
-          <tbody></tbody>
-        </table>
+        <div class="table-container">
+          <table id="stages-table">
+            <thead>
+              <tr>
+                <th><i class="fas fa-flag"></i> 阶段名称</th>
+                <th><i class="fas fa-coins"></i> 所需资产</th>
+                <th><i class="fas fa-hourglass-half"></i> 预计时间</th>
+              </tr>
+            </thead>
+            <tbody></tbody>
+          </table>
+        </div>
       </div>
 
+      <!-- 赞赏区域 -->
       <div class="v50">
         <div class="appreciate-section">
           <img src="appreciate.jpg" class="appreciate-img" alt="赞赏码" aria-label="赞赏码" />
-          <p>感谢您的支持，扫码赞赏！</p>
+          <p>如果对您有帮助，欢迎扫码赞赏支持 ❤️</p>
         </div>
       </div>
     </div>
+
+    <footer>
+      <p>
+        <i class="fas fa-info-circle"></i>
+        本计算器仅供参考娱乐，请根据实际情况制定个人财务计划
+      </p>
+    </footer>
   </div>
-  <footer>
-    <p>
-      <i class="fas fa-info-circle"></i>
-      本计算器仅供参考，请根据实际情况制定个人财务计划
-    </p>
-  </footer>
-  </div>
+
   <script src="app.js"></script>
 </body>
 
